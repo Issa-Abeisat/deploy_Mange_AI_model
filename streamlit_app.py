@@ -6,9 +6,8 @@ st.write("Model: google/flan-t5-small")
 
 @st.cache_resource
 def load_model():
-    # Omitting the explicit 'text2text-generation' string allows Transformers 
-    # to load task parameters directly from the model's Hub config
-    return pipeline(model="google/flan-t5-small")
+    # Pass both the explicit task string and the model name
+    return pipeline("text2text-generation", model="google/flan-t5-small")
 
 generator = load_model()
 
