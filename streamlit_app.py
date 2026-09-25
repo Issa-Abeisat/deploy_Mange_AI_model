@@ -1,5 +1,4 @@
 import streamlit as st
-import torch
 from transformers import pipeline
 
 st.title("Generative AI Demo")
@@ -7,8 +6,9 @@ st.write("Model: google/flan-t5-small")
 
 @st.cache_resource
 def load_model():
-    device_id = 0 if torch.cuda.is_available() else -1
-    return pipeline("text2text-generation", model="google/flan-t5-small", device=device_id)
+    # Omitting the explicit 'text2text-generation' string allows Transformers 
+    # to load task parameters directly from the model's Hub config
+    return pipeline(model="google/flan-t5-small")
 
 generator = load_model()
 
